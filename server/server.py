@@ -15,7 +15,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route("/")
 def index():
-    return render_template("app.html")
+    return {"message": "Plant Disease Predictor API is running"}
 
 
 @app.route("/predict", methods=["POST"])

@@ -4,7 +4,13 @@ from flask_cors import CORS
 import os
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "templates"),
+    static_folder=os.path.join(BASE_DIR, "static")
+)
 CORS(app)
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), "server/uploads")

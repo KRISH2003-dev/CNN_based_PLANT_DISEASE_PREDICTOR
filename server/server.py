@@ -15,7 +15,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route("/")
 def index():
-    return {"message": "Plant Disease Predictor API is running"}
+    return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
@@ -29,7 +29,7 @@ def predict_label():
 
     leaf_label, leaf_conf = util.check_leaf_image(saved_path)
 
-    if leaf_label != "Leaf" and leaf_conf > 0.7:
+    if leaf_label != "Leaf":
         return jsonify({
             "disease": "Invalid Image",
             "confidence": "0%",
@@ -41,15 +41,6 @@ def predict_label():
     if isinstance(prediction, tuple):
         disease = prediction[0]
         confidence = round(float(prediction[1]) * 100, 2)
-
-        CONFIDENCE_THRESHOLD = 70
-        if confidence < CONFIDENCE_THRESHOLD:
-            return jsonify({
-                "disease": "Uncertain Image",
-                "confidence": f"{confidence}%",
-                "advice": "Please upload a clearer image of a single leaf."
-            })
-
     else:
         disease = str(prediction)
         confidence = 0.0

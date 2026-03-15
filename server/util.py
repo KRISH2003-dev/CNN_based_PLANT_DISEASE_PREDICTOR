@@ -68,14 +68,15 @@ def load_leaf_model():
     if __leaf_model is None:
         print("Loading leaf detector model...")
 
-        model = models.resnet18(weights=None)
+        model = models.efficientnet_b0(weights=None)
 
-        in_features = model.fc.in_features
+        in_features = model.classifier[1].in_features
 
-        model.fc = nn.Sequential(
+        model.classifier = nn.Sequential(
+            nn.Dropout(0.4),
             nn.Linear(in_features, 256),
             nn.ReLU(inplace=True),
-            nn.Dropout(0.4),
+            nn.Dropout(0.3),
             nn.Linear(256, 2)
         )
 
@@ -91,7 +92,6 @@ def load_leaf_model():
         print("Leaf detector loaded.")
 
     return __leaf_model
-
 
 def check_leaf_image(image_path):
 

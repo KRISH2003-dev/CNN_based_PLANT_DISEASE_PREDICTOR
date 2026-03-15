@@ -12,8 +12,6 @@ server/.venv/
 server/.venv310/
 
 dataset/
-
-*.pth
 *.pt
 *.ckpt
 *.h5

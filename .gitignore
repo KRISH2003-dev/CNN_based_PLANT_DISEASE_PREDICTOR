@@ -40,3 +40,6 @@ Plant_Disease_model_pytorch_v2.ipynb
 
 .DS_Store
 Thumbs.db
+
+client/public/desktop.ini
+server/labels1.csv

@@ -114,6 +114,4 @@ def predict_label():
 
 if __name__ == "__main__":
     print("Starting Flask server for Plant Disease Prediction...")
-    util.load_saved_artifacts()
-    util.load_leaf_model()
     app.run(debug=True)
